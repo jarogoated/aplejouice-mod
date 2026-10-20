@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "aplejuice",
+  "version": "${version}",
+  "name": "Aplejouice Mod",
+  "icon": "assets/aplejuice/icon.png",
+  "description": "Track item use, customize your watchlist and show counters beside player names.",
+  "authors": ["Joris"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["de.joris.aplejuice.Aplejuice"],
+    "client": ["de.joris.aplejuice.client.AplejuiceClient"]
+  },
+  "mixins": ["aplejuice.mixins.json", {"config": "aplejuice.client.mixins.json", "environment": "client"}],
+  "depends": {"fabricloader": ">=0.18.4", "minecraft": "~1.21.11", "java": ">=21", "fabric-api": "*"}
+}

@@ -1,0 +1,12 @@
+.gradle/
+build/
+run/
+.idea/
+*.iml
+logs/
+release/
+docs/screenshots/modrinth-under-review.jpg
+docs/screenshots/github-published.jpg
+.env
+.env.*
+*.jfr

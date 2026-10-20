@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "aplejuice_test",
+  "version": "1.0.0",
+  "name": "Aplejuice integration tests",
+  "environment": "client",
+  "entrypoints": { "fabric-client-gametest": ["de.joris.aplejuice.test.ItemTrackGameTest"] }
+}

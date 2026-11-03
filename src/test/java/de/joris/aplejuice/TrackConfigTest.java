@@ -91,7 +91,7 @@ class TrackConfigTest {
     }
     @Test void coordinateAxesPersistAndMigrateSafely() throws Exception {
         Path path=directory.resolve("coordinates.json");
-        for(String axes:List.of("XYZ","XY","XZ")) {
+        for(String axes:List.of("XYZ","XY","XZ","YZ","X","Y","Z","NONE")) {
             var settings=new TrackConfig(); settings.coordinateAxes=axes;
             assertTrue(settings.save(path));assertEquals(axes,TrackConfig.load(path).coordinateAxes);
         }

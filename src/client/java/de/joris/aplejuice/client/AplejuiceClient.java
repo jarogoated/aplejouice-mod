@@ -153,7 +153,7 @@ public final class AplejuiceClient implements ClientModInitializer {
     public static String copyCoordinates() {
         var client=Minecraft.getInstance();
         String value=coordinateText();
-        if(value==null) return null;
+        if(value==null || value.isEmpty()) return null;
         boolean english="en_us".equals(config.language);
         try {
             client.keyboardHandler.setClipboard(value);

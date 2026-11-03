@@ -10,9 +10,9 @@ Beim Minecraft-Start wird einmal im Hintergrund `https://aplejouice.com/api/mod/
 
 Neue Versionen werden über [GitHub Releases](https://github.com/jarogoated/aplejouice-mod/releases/new) veröffentlicht: Tag `v1.7.0`, dazu `Aplejouice-Mod-1.7.0-mc1.21.11.jar` (Versionsnummer entsprechend erhöhen). Die [Downloadseite](https://aplejouice.com/downloads) übernimmt veröffentlichte stabile Releases automatisch, spätestens nach etwa fünf Minuten Cache-Zeit. Entwürfe, Pre-Releases und andere Minecraft-Versionen werden nicht ausgewählt. Quellcode und Tag müssen zum gebauten JAR gehören. Der SHA-256-Wert der GitHub-Datei wird auf der Downloadseite angezeigt, sofern GitHub ihn bereitstellt.
 
-## Koordinaten (1.6.0)
+## Koordinaten (1.7.1)
 
-Unter **J → Koordinaten** eine eigene Kopiertaste und **XYZ**, **XY** oder **XZ** wählen. Die Taste ist anfangs unbelegt. Alternativ **Jetzt kopieren** benutzen. Kopiert werden die aktuellen Blockkoordinaten mit Leerzeichen, ohne Beschriftung und ohne Nachkommastellen, z. B. `111 47 -79`. Negative Positionen werden wie Minecraft abgerundet (`−0,1 → −1`). Der Tab zeigt eine laufende Vorschau; nach dem Kopieren erscheint kurz eine lokale Bestätigung über der Hotbar. Es wird keine Chatnachricht an den Server gesendet. Achsenauswahl und Taste bleiben nach Neustarts erhalten. Das Modul funktioniert unabhängig vom Item-Tracking.
+Unter **J → Koordinaten** eine eigene Kopiertaste wählen und **X**, **Y** sowie **Z** jeweils unabhängig ein- oder ausschalten. Alle Kombinationen sind möglich. Sind alle Achsen aus, wird nichts kopiert und die Zwischenablage bleibt unverändert. Die Taste ist anfangs unbelegt. Alternativ **Jetzt kopieren** benutzen. Kopiert werden die aktuellen Blockkoordinaten mit Leerzeichen, ohne Beschriftung und ohne Nachkommastellen, z. B. `111 47 -79`. Negative Positionen werden wie Minecraft abgerundet (`−0,1 → −1`). Der Tab zeigt eine laufende Vorschau; nach dem Kopieren erscheint kurz eine lokale Bestätigung über der Hotbar. Es wird keine Chatnachricht an den Server gesendet. Achsenauswahl und Taste bleiben nach Neustarts erhalten. Das Modul funktioniert unabhängig vom Item-Tracking.
 
 ## Willkommen (1.5.4)
 

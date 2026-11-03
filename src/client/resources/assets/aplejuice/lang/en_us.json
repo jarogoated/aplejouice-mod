@@ -11,6 +11,7 @@
   "ui.aplejuice.coordinatesCopied": "Copied: %s",
   "ui.aplejuice.coordinatesCopyFailed": "Could not copy. Are you in a world?",
   "ui.aplejuice.coordinatesPreview": "Current coordinates",
+  "ui.aplejuice.coordinatesNoAxes": "Enable at least one axis.",
   "ui.aplejuice.coordinatesNoWorld": "Join a world or server first.",
   "key.aplejuice.menu": "Open Aplejouice Mod menu",
   "key.category.aplejuice.main": "Aplejouice Mod",

@@ -11,6 +11,7 @@
   "ui.aplejuice.coordinatesCopied": "Kopiert: %s",
   "ui.aplejuice.coordinatesCopyFailed": "Kopieren fehlgeschlagen. Bist du in einer Welt?",
   "ui.aplejuice.coordinatesPreview": "Aktuelle Koordinaten",
+  "ui.aplejuice.coordinatesNoAxes": "Aktiviere mindestens eine Achse.",
   "ui.aplejuice.coordinatesNoWorld": "Betritt eine Welt oder einen Server.",
   "key.aplejuice.menu": "Aplejouice Mod-Menü öffnen",
   "key.category.aplejuice.main": "Aplejouice Mod",

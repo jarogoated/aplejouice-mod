@@ -101,14 +101,16 @@ public final class TrackScreen extends Screen {
         }
         if (tab==5) {
             keyBinding(AplejuiceClient.coordinatesKey);
-            for(var axes:CoordinateAxes.values()) {
-                button(438+axes.ordinal()*94,77,88,21,axes.name(),axes.name().equals(cfg().coordinateAxes),
-                        () -> { cfg().coordinateAxes=axes.name(); saveRebuild(); });
+            for(int i=0;i<3;i++) {
+                char axis="XYZ".charAt(i);
+                boolean enabled=CoordinateAxes.parse(cfg().coordinateAxes).includes(axis);
+                button(438+i*94,77,88,21,axis+": "+t(enabled ? "on" : "off"),enabled,
+                        () -> { cfg().coordinateAxes=CoordinateAxes.parse(cfg().coordinateAxes).toggle(axis).name(); saveRebuild(); });
             }
             button(560,239,156,23,t("coordinatesCopy"),false,() -> {
                 String value=AplejuiceClient.copyCoordinates();
                 notice=value==null ? t("coordinatesCopyFailed") : t("coordinatesCopied",value);
-            }).active=minecraft.player!=null;
+            }).active=minecraft.player!=null && CoordinateAxes.parse(cfg().coordinateAxes)!=CoordinateAxes.NONE;
         }
     }
     private void keyBinding(KeyMapping mapping) {
@@ -237,7 +239,7 @@ public final class TrackScreen extends Screen {
             renderKeyBinding(g);
             bold(g,t("coordinatesPreview"),254,198,TEXT);
             String value=AplejuiceClient.coordinateText();
-            label(g,value==null ? t("coordinatesNoWorld") : cfg().coordinateAxes+": "+value,254,221,0xFFFFCA73);
+            label(g,value==null ? t("coordinatesNoWorld") : value.isEmpty() ? t("coordinatesNoAxes") : cfg().coordinateAxes+": "+value,254,221,0xFFFFCA73);
         }
         if (!notice.isEmpty()) label(g, font.plainSubstrByWidth(notice, 450), 254, tab==1 ? 341 : 276, 0xFFFFCA73);
         g.pose().popMatrix();

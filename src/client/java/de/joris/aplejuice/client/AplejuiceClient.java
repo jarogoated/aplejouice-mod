@@ -29,6 +29,10 @@ public final class AplejuiceClient implements ClientModInitializer {
     public static final CounterStore counters = new CounterStore();
     public static final Map<UUID, String> names = new LinkedHashMap<>();
     public static boolean authoritative;
+    public static KeyMapping borderKey;
+    public static KeyMapping waterKey;
+    public static KeyMapping menuKey;
+    public static KeyMapping coordinatesKey;
     private static final UsageQueue<Placement> pending = new UsageQueue<>(128);
     private static final ZeroHealthGuard zeroHealth = new ZeroHealthGuard();
     private static final UsageQueue<PendingThrow> pendingThrows = new UsageQueue<>(128);
@@ -68,7 +72,14 @@ public final class AplejuiceClient implements ClientModInitializer {
             return InteractionResult.PASS;
         });
         var category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("aplejuice", "main"));
-        var open = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.aplejuice.menu", GLFW.GLFW_KEY_J, category));
+        var open = menuKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.aplejuice.menu", GLFW.GLFW_KEY_J, category));
+        borderKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.aplejuice.border", GLFW.GLFW_KEY_UNKNOWN, category));
+        waterKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.aplejuice.water", GLFW.GLFW_KEY_UNKNOWN, category));
+        coordinatesKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.aplejuice.coordinates", GLFW.GLFW_KEY_UNKNOWN, category));
+        DuelBorderRenderer.register();
+        WaterSourceRenderer.register();
+        WelcomeOverlay.register();
+        UpdateChecker.register();
         ClientPlayNetworking.registerGlobalReceiver(UsagePayload.TYPE, (packet, context) -> context.client().execute(() -> {
             if (!authoritative) { reset(); authoritative = true; }
             if (isWatched(packet.player()) && !deadPlayers.containsKey(packet.player()) && config.items.contains(packet.item()))
@@ -95,6 +106,19 @@ public final class AplejuiceClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             tick++;
             while (open.consumeClick()) if (client.screen == null) client.setScreen(new TrackScreen(null));
+            while (borderKey.consumeClick()) if (client.screen == null && client.level != null) {
+                config.duelBorder = !config.duelBorder;
+                config.save();
+                if (client.player != null) client.player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                        config.duelBorder ? "ui.aplejuice.borderEnabled" : "ui.aplejuice.borderDisabled"), true);
+            }
+            while (waterKey.consumeClick()) if (client.screen == null && client.level != null) {
+                config.waterSources = !config.waterSources;
+                config.save();
+                if (client.player != null) client.player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                        config.waterSources ? "ui.aplejuice.waterEnabled" : "ui.aplejuice.waterDisabled"), true);
+            }
+            while (coordinatesKey.consumeClick()) if (client.screen==null && client.level!=null) copyCoordinates();
             if (client.level == null) return;
             ensureLevel(client);
             if (!config.enabled) { pending.clear(); pendingThrows.clear(); return; }
@@ -121,6 +145,27 @@ public final class AplejuiceClient implements ClientModInitializer {
         return key == null ? Items.AIR : Objects.requireNonNullElse(BuiltInRegistries.ITEM.getValue(key), Items.AIR);
     }
     public static long clientTick() { return tick; }
+    public static String coordinateText() {
+        var player=Minecraft.getInstance().player;
+        return player==null ? null : CoordinateAxes.parse(config.coordinateAxes).format(player.getX(),player.getY(),player.getZ());
+    }
+    /** Clipboard only: no chat message or packet is sent to the server. */
+    public static String copyCoordinates() {
+        var client=Minecraft.getInstance();
+        String value=coordinateText();
+        if(value==null) return null;
+        boolean english="en_us".equals(config.language);
+        try {
+            client.keyboardHandler.setClipboard(value);
+            client.player.displayClientMessage(net.minecraft.network.chat.Component.literal(
+                    (english ? "Coordinates copied: " : "Koordinaten kopiert: ")+value),true);
+            return value;
+        } catch(RuntimeException exception) {
+            client.player.displayClientMessage(net.minecraft.network.chat.Component.literal(
+                    english ? "Could not copy coordinates." : "Koordinaten konnten nicht kopiert werden."),true);
+            return null;
+        }
+    }
     /** Retain preferences, but reset counters and selection for a new server connection. */
     public static void resetConnection() {
         config.save();

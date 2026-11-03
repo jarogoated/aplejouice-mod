@@ -6,6 +6,12 @@ import net.minecraft.resources.Identifier;
 
 /** One quad per sprite prevents seams between independently rounded pixel rectangles. */
 public final class GuiAssets {
+    public static void mapPreview(GuiGraphics g,de.joris.aplejuice.BorderMap map,int x,int y,int w,int h) {
+        float scale=Math.min(w/(float)map.imageWidth(),h/(float)map.imageHeight());
+        int dw=Math.round(map.imageWidth()*scale),dh=Math.round(map.imageHeight()*scale);
+        g.blit(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath("aplejuice","textures/maps/"+map.image()),
+                x+(w-dw)/2,y+(h-dh)/2,0,0,dw,dh,map.imageWidth(),map.imageHeight(),map.imageWidth(),map.imageHeight());
+    }
     public static void logo(GuiGraphics g, int x, int y, int size) {
         g.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath("aplejuice", "icon.png"),
                 x, y, 0, 0, size, size, 64, 64, 64, 64);

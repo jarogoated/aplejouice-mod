@@ -4,6 +4,38 @@ A Fabric mod for Minecraft Java 1.21.11 that displays observed item-use counters
 
 Fabric-Mod für **Minecraft Java 1.21.11**, Java 21 und Fabric Loader ab 0.18.4.
 
+## Updates (ab 1.7.0)
+
+Beim Minecraft-Start wird einmal im Hintergrund `https://aplejouice.com/api/mod/latest?minecraft=1.21.11` abgefragt. Die Anfrage enthält die Minecraft-Version und die Mod-Version im User-Agent, keine Spielerkennung. Kurze Verbindungs-/Lese-Timeouts und eine Größenbegrenzung verhindern, dass ein Ausfall den Spielstart blockiert. Nur neuere stabile Versionen für dieselbe Minecraft-Version mit passender Mod-ID werden angeboten. Im Hauptmenü erscheint einmal pro Start ein Hinweis mit **Update herunterladen** und **Später**; falls die Antwort erst ingame eintrifft, erscheint einmal eine lokale Nachricht. Unter **Einstellungen → Downloads** bleibt die Downloadseite erreichbar. Es werden keine Dateien automatisch heruntergeladen oder ersetzt. Ältere Builds vor 1.7.0 bekommen den Prüfer erst durch manuelles Aktualisieren.
+
+Neue Versionen werden über [GitHub Releases](https://github.com/jarogoated/aplejouice-mod/releases/new) veröffentlicht: Tag `v1.7.0`, dazu `Aplejouice-Mod-1.7.0-mc1.21.11.jar` (Versionsnummer entsprechend erhöhen). Die [Downloadseite](https://aplejouice.com/downloads) übernimmt veröffentlichte stabile Releases automatisch, spätestens nach etwa fünf Minuten Cache-Zeit. Entwürfe, Pre-Releases und andere Minecraft-Versionen werden nicht ausgewählt. Quellcode und Tag müssen zum gebauten JAR gehören. Der SHA-256-Wert der GitHub-Datei wird auf der Downloadseite angezeigt, sofern GitHub ihn bereitstellt.
+
+## Koordinaten (1.6.0)
+
+Unter **J → Koordinaten** eine eigene Kopiertaste und **XYZ**, **XY** oder **XZ** wählen. Die Taste ist anfangs unbelegt. Alternativ **Jetzt kopieren** benutzen. Kopiert werden die aktuellen Blockkoordinaten mit Leerzeichen, ohne Beschriftung und ohne Nachkommastellen, z. B. `111 47 -79`. Negative Positionen werden wie Minecraft abgerundet (`−0,1 → −1`). Der Tab zeigt eine laufende Vorschau; nach dem Kopieren erscheint kurz eine lokale Bestätigung über der Hotbar. Es wird keine Chatnachricht an den Server gesendet. Achsenauswahl und Taste bleiben nach Neustarts erhalten. Das Modul funktioniert unabhängig vom Item-Tracking.
+
+## Willkommen (1.5.4)
+
+Unter **Einstellungen / Settings** gibt es **Willkommenskarte erneut anzeigen** mit Wiederholen-Icon. Nach dem Schließen erscheint die Karte wieder ingame; beim nächsten Öffnen des Mod-Menüs wird sie erneut ausgeblendet. Kein erneuter Serverbeitritt nötig.
+
+Ab 1.5.7 erscheint beim ersten Spielen oben rechts eine kompakte orange-goldene Willkommenskarte mit dem mitgelieferten, winkenden Skin und der aktuell belegten Menütaste. Ab 1.5.5 erscheint sie ausschließlich ingame bei sichtbarem HUD und geschlossenem Menü. Sie hat keinen Timeout. Sobald das Mod-Menü zum ersten Mal tatsächlich geöffnet wird, wird `welcomeSeen` gespeichert; danach bleibt die Karte auch nach Serverwechseln und Neustarts ausgeblendet. Deutsch/Englisch richtet sich nach der Mod-Sprache. Die Karte verändert den Spielerskin nicht. Sie ist auf 55 % der bisherigen Größe verkleinert und passt rechts neben die normale Bossbar. Bei sehr schmaler GUI wird sie unterhalb des Bossbar-Bereichs platziert.
+
+## Hugo SMP Dual End Border (1.5.3)
+
+Unter **J → Border** gibt es genau drei auswählbare Maps mit ihren jeweiligen Bildern: **Galaxy** (Plains), **Colloseum** (Wüste) und **Japan** (Cherry). Mit den Pfeilen blättern und mit **Wählen** aktivieren. Eine zusätzliche Vorschau zeigt **Kommt bald! / Coming Soon!** und ist nicht auswählbar. Die alten Namen und die unzugeordnete Border entfallen; gespeichertes `plains_tree` wird automatisch zu `galaxy`. Taste, Map und Schalter werden gespeichert; Taste zunächst unbelegt, Schalter zunächst aus. Die lila Border ist clientseitig, ohne Kollision, und innerhalb von 160 Blöcken sichtbar. Leichte Messabweichungen werden als Ellipsoid angenähert.
+
+| Map | Seitliche Messpunkte (X Y Z) | Unten | Oben |
+| --- | --- | --- | --- |
+| Galaxy | 114 45 −80; 105 45 −71; 97 45 −80; 106 45 −89 | 106 37 −80 | 106 54 −80 |
+| Colloseum | 112 51 −89; 120 51 −80; 111 51 −71; 103 51 −80 | 112 43 −80 | 112 60 −80 |
+| Japan | 111 46 −70; 102 46 −79; 111 46 −87; 120 46 −79 | 111 38 −79 | 111 56 −79 |
+
+Tab-Reihenfolge: **Item Track → Spieler → Visuals → Border → Koordinaten → Einstellungen** (Englisch: Players / Coordinates / Settings).
+
+## Wasserquellen (1.5.2)
+
+**J → Visuals → Wasserquellen hervorheben** markiert echte Wasser-Quellblöcke türkis an ihrer Oberfläche. Eigene Umschalttaste direkt im Tab oder in Minecrafts Steuerung festlegen. Standardmäßig aus, unabhängig vom Item-Tracking, Einstellungen gespeichert. Blockänderungen aktualisieren die Markierung sofort nach dem Eintreffen im Client. Bereits markierte Quellen werden zusätzlich jeden Tick auf Entfernung geprüft. Neue Quellen in geladenen Chunks werden mit bis zu 1536 Positionen pro Tick entdeckt, nahe Positionen zuerst. Radius 12, maximal 256 Quellen; kompletter Suchlauf ca. 0,25 s bei 20 TPS. Fließendes Wasser und wassergefüllte Blöcke sind ausgeschlossen. Solide Blöcke verdecken die Markierung; keine Chunks werden nachgeladen und keine Serverpakete gesendet.
+
 ## Installation
 
 1. Fabric für Minecraft **1.21.11** installieren.

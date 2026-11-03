@@ -16,6 +16,11 @@ public final class TrackConfig {
     public boolean enabled = true;
     public boolean showZero = true;
     public boolean opponentOnly = false;
+    public boolean duelBorder = false;
+    public boolean waterSources = false;
+    public boolean welcomeSeen = false;
+    public String borderMap = "galaxy";
+    public String coordinateAxes = "XYZ";
     public int range = 48;
     public String language = "de_de";
     private static Path path() { return FabricLoader.getInstance().getConfigDir().resolve("aplejuice-item-track.json"); }
@@ -36,6 +41,8 @@ public final class TrackConfig {
         if (items == null) items = new ArrayList<>();
         items = new ArrayList<>(items.stream().filter(Objects::nonNull).distinct().limit(8).toList());
         range = Math.clamp(range, 8, 64);
+        borderMap = de.joris.aplejuice.BorderMap.byId(borderMap).id();
+        coordinateAxes = de.joris.aplejuice.CoordinateAxes.parse(coordinateAxes).name();
         if (!"en_us".equals(language)) language = "de_de";
     }
     private static Path backup(Path path) { return path.resolveSibling(path.getFileName() + ".bak"); }

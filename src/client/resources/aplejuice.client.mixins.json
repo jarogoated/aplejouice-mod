@@ -1,1 +1,1 @@
-{"required":true,"package":"de.joris.aplejuice.client.mixin","compatibilityLevel":"JAVA_21","client":["ClientPacketListenerMixin","MinecraftAttackMixin","PlayerRendererMixin","EntityRendererMixin","AvatarStateMixin"],"injectors":{"defaultRequire":1}}
+{"required":true,"package":"de.joris.aplejuice.client.mixin","compatibilityLevel":"JAVA_21","client":["ClientPacketListenerMixin","ClientLevelWaterMixin","MinecraftAttackMixin","PlayerRendererMixin","EntityRendererMixin","AvatarStateMixin"],"injectors":{"defaultRequire":1}}

@@ -40,9 +40,40 @@ class BakeIcons {
     }
     public static void main(String[] args) throws Exception {
         Path root = Path.of(args[0]); Files.createDirectories(root);
-        for (String name : new String[]{"eye", "reset", "display", "players", "setting_tracking", "setting_zeros", "setting_range", "setting_opponent"}) {
+        for (String name : new String[]{"eye", "reset", "display", "players", "setting_tracking", "setting_zeros", "setting_range", "setting_opponent", "border", "keybind", "water_source", "coming_soon", "coordinates"}) {
             BufferedImage image = canvas(16, 16);
             switch (name) {
+                case "coordinates" -> {
+                    rect(7,1,2,13,0xFFFFCA73); rect(2,7,12,2,0xFFE67A32);
+                    rect(6,2,4,1,0xFFFFCA73); rect(5,3,6,1,0xFFFFCA73);
+                    rect(12,5,1,6,0xFFE67A32); rect(13,6,1,4,0xFFE67A32);
+                    rect(3,12,3,1,0xFF76CEEE); rect(4,10,3,1,0xFF76CEEE);
+                    rect(5,9,2,1,0xFF76CEEE); rect(2,13,3,1,0xFF76CEEE);
+                }
+                case "coming_soon" -> {
+                    rect(3,1,10,2,0xFFFFCA73); rect(3,13,10,2,0xFFFFCA73);
+                    rect(4,3,1,3,0xFFE67A32); rect(11,3,1,3,0xFFE67A32);
+                    rect(5,6,2,1,0xFFE67A32); rect(9,6,2,1,0xFFE67A32);
+                    rect(7,7,2,2,0xFFFFCA73); rect(5,10,6,2,0xFFFFCA73);
+                    rect(4,10,1,3,0xFFE67A32); rect(11,10,1,3,0xFFE67A32);
+                }
+                case "water_source" -> {
+                    rect(7, 1, 2, 2, 0xFFB6F6FF); rect(6, 3, 4, 2, 0xFF6BE8FF);
+                    rect(4, 5, 8, 2, 0xFF35BDE8); rect(3, 7, 10, 5, 0xFF2598D8);
+                    rect(4, 12, 8, 2, 0xFF1874B8); rect(6, 14, 4, 1, 0xFF1874B8);
+                    rect(5, 7, 2, 4, 0xFFB6F6FF); rect(2, 13, 2, 2, 0xFFFFCA73);
+                    rect(12, 13, 2, 2, 0xFFFFCA73);
+                }
+                case "border" -> {
+                    g.setColor(new Color(0xFFB19AF0, true)); g.drawOval(1, 1, 13, 13);
+                    g.drawOval(4, 1, 7, 13); g.drawOval(1, 5, 13, 5);
+                    rect(7, 1, 1, 14, 0xFFD9CBFF); rect(1, 7, 14, 1, 0xFFD9CBFF);
+                }
+                case "keybind" -> {
+                    rect(1, 3, 14, 11, 0xFFB18C65); rect(2, 4, 12, 8, 0xFF303448);
+                    rect(4, 5, 2, 2, 0xFFFFCA73); rect(7, 5, 2, 2, 0xFFFFCA73);
+                    rect(10, 5, 2, 2, 0xFFFFCA73); rect(4, 9, 8, 1, 0xFFFFCA73);
+                }
                 case "eye" -> pixels(EYE);
                 case "reset" -> pixels(RESET);
                 case "display" -> {
